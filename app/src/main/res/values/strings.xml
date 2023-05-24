@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">InPost Recruitment Task</string>
 
+    <string name="shipment_nr">Nr przesyłki</string>
+    <string name="status">Status</string>
+    <string name="sender">Nadawca</string>
+    <string name="more">więcej</string>
+    <string name="pick_up_to">Czeka na odbiór do</string>
+    <string name="picked_up">Odebrana</string>
+    <string name="section_ready_to_pickup">Gotowe do odbioru</string>
+    <string name="section_other">Pozostałe</string>
+
     <string name="status_adopted_at_sorting_center">Przyjęta w Sortowni</string>
     <string name="status_sent_from_sorting_center">Wysłana z Sortowni</string>
     <string name="status_adopted_at_source_branch">Przyjęta w Oddziale</string>
