@@ -1,6 +1,7 @@
 [versions]
 kotlin = "1.8.10"
 agp = "8.1.0-beta03"
+ksp = "1.8.10-1.0.9"
 core-ktx = "1.10.1"
 appcompat = "1.6.1"
 material = "1.9.0"
@@ -10,7 +11,15 @@ fragment = "1.5.7"
 swiperefreshlayout = "1.1.0"
 moshi-kotlin = "1.14.0"
 hilt = "2.46.1"
+hilt-navigation = "1.0.0"
 room = "2.5.1"
+composecompiler = "1.4.4"
+compose-ui = "1.4.3"
+compose-material2 = "1.4.3"
+compose-material3 = "1.1.0"
+activity-compose = "1.7.1"
+compose-destination = "1.8.38-beta"
+accompanist-systemuicontroller = "0.30.0"
 junit = "4.13.2"
 androidx-junit = "1.1.5"
 androidx-expresso = "3.5.1"
@@ -24,6 +33,17 @@ androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecy
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
 androidx-swipeRefreshLayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
+
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "compose-ui" }
+androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
+androidx-compose-material2 = { group = "androidx.compose.material", name = "material", version.ref = "compose-material2" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "compose-material3" }
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation" }
+compose-destinations-core = { group = "io.github.raamcosta.compose-destinations", name = "animations-core", version.ref = "compose-destination" }
+compose-destinations-ksp = { group = "io.github.raamcosta.compose-destinations", name = "ksp", version.ref = "compose-destination" }
+accompanist-systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "accompanist-systemuicontroller" }
+
 moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi-kotlin" }
 
 dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
@@ -41,6 +61,7 @@ android = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 android-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 [bundles]
 
