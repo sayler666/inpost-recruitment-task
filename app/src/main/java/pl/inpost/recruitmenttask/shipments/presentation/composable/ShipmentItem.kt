@@ -1,7 +1,9 @@
-package pl.inpost.recruitmenttask.shipments.ui
+package pl.inpost.recruitmenttask.shipments.presentation.composable
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,22 +14,24 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import pl.inpost.recruitmenttask.R
-import pl.inpost.recruitmenttask.shipments.model.ShipmentDisplayableItem
+import pl.inpost.recruitmenttask.shipments.presentation.model.ShipmentDisplayableItem
 import pl.inpost.recruitmenttask.ui.TextLabel
 
 
 @Composable
 fun ShipmentItem(shipment: ShipmentDisplayableItem) {
+    val context = LocalContext.current
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -36,9 +40,18 @@ fun ShipmentItem(shipment: ShipmentDisplayableItem) {
             Modifier
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.surface)
-                .padding(top = 12.dp)
+                .clickable {
+                    // TODO out of scope
+                    Toast
+                        .makeText(context, shipment.number, Toast.LENGTH_SHORT)
+                        .show()
+                }
+                .padding(top = 16.dp)
+                .padding(bottom = 16.dp)
+                .padding(horizontal = 20.dp)
+
         ) {
-            Row(Modifier.padding(horizontal = 16.dp)) {
+            Row {
                 Column {
                     TextLabel(text = stringResource(id = R.string.shipment_nr))
                     Text(shipment.number, style = MaterialTheme.typography.headlineMedium)
@@ -55,7 +68,6 @@ fun ShipmentItem(shipment: ShipmentDisplayableItem) {
             Column {
                 Row(
                     Modifier
-                        .padding(horizontal = 16.dp)
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
@@ -73,7 +85,6 @@ fun ShipmentItem(shipment: ShipmentDisplayableItem) {
             Column {
                 Row(
                     Modifier
-                        .padding(horizontal = 16.dp)
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
@@ -95,7 +106,7 @@ fun ShipmentItem(shipment: ShipmentDisplayableItem) {
             }
             Spacer(modifier = Modifier.height(16.dp))
 
-            Row(Modifier.padding(start = 16.dp)) {
+            Row(verticalAlignment = Alignment.Bottom) {
                 Column {
                     TextLabel(
                         text = stringResource(id = R.string.sender)
@@ -103,17 +114,16 @@ fun ShipmentItem(shipment: ShipmentDisplayableItem) {
                     Text(text = shipment.sender, style = MaterialTheme.typography.headlineLarge)
                 }
                 Spacer(modifier = Modifier.weight(1f))
-                TextButton(
-                    modifier = Modifier.padding(0.dp),
-                    onClick = { /* TODO show parcel details (out of scope) */ }) {
-                    Row {
-                        Text(stringResource(id = R.string.more))
-                        Image(
-                            modifier = Modifier.align(Alignment.CenterVertically),
-                            painter = painterResource(id = R.drawable.ic_arrow_right),
-                            contentDescription = null
-                        )
-                    }
+                Row {
+                    Text(
+                        stringResource(id = R.string.more),
+                        style = MaterialTheme.typography.labelMedium
+                    )
+                    Image(
+                        modifier = Modifier.align(Alignment.CenterVertically),
+                        painter = painterResource(id = R.drawable.ic_arrow_right),
+                        contentDescription = null
+                    )
                 }
             }
         }

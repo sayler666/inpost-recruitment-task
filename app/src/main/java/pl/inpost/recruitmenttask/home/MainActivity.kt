@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.ramcosta.composedestinations.DestinationsNavHost
 import dagger.hilt.android.AndroidEntryPoint
-import pl.inpost.recruitmenttask.shipments.ui.NavGraphs
+import pl.inpost.recruitmenttask.shipments.presentation.composable.NavGraphs
 import pl.inpost.recruitmenttask.ui.InPostTheme
 import pl.inpost.recruitmenttask.ui.StatusBarColor
 

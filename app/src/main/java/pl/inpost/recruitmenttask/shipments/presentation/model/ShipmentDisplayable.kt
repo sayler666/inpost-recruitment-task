@@ -1,4 +1,4 @@
-package pl.inpost.recruitmenttask.shipments.model
+package pl.inpost.recruitmenttask.shipments.presentation.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

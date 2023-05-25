@@ -18,6 +18,10 @@ val Typography = Typography(
         fontSize = 11.sp
     ),
     labelMedium = TextStyle(
+        fontFamily = MontserratBold,
+        fontSize = 12.sp
+    ),
+    labelLarge = TextStyle(
         fontFamily = MontserratSemiBold,
         fontSize = 13.sp
     ),
