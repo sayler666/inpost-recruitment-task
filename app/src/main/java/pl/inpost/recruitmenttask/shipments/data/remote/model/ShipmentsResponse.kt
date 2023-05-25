@@ -1,4 +1,4 @@
-package pl.inpost.recruitmenttask.network.model
+package pl.inpost.recruitmenttask.shipments.data.remote.model
 
 data class ShipmentsResponse(
     val shipments: List<ShipmentNetwork>

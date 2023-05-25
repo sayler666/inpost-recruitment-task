@@ -1,4 +1,4 @@
-package pl.inpost.recruitmenttask.network
+package pl.inpost.recruitmenttask.shipments.data.remote.api.adapter
 
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.ToJson

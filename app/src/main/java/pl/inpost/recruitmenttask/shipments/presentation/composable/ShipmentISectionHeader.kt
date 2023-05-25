@@ -1,4 +1,4 @@
-package pl.inpost.recruitmenttask.shipments.ui
+package pl.inpost.recruitmenttask.shipments.presentation.composable
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import pl.inpost.recruitmenttask.shipments.model.ShipmentDisplayableHeader
+import pl.inpost.recruitmenttask.shipments.presentation.model.ShipmentDisplayableHeader
 
 
 @Composable
@@ -38,7 +38,7 @@ fun ShipmentSectionHeader(header: ShipmentDisplayableHeader) {
             modifier = Modifier.align(alignment = Alignment.CenterVertically),
             maxLines = 1,
             text = stringResource(id = header.text),
-            style = MaterialTheme.typography.labelMedium
+            style = MaterialTheme.typography.labelLarge
                 .copy(color = MaterialTheme.colorScheme.tertiary)
         )
         Box(

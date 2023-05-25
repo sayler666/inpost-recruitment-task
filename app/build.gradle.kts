@@ -22,6 +22,12 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
 
+    buildFeatures {
+        viewBinding = true
+        compose = true
+        buildConfig = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -31,18 +37,22 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+
+        isCoreLibraryDesugaringEnabled = true
     }
 
     kotlin {
         jvmToolchain(17)
     }
 
-    buildFeatures {
-        viewBinding = true
-        compose = true
+    kotlinOptions {
+        freeCompilerArgs = listOf(
+            "-opt-in=androidx.compose.material.ExperimentalMaterialApi"
+        )
     }
 
     composeOptions {
@@ -57,6 +67,7 @@ android {
 }
 
 dependencies {
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
     implementation(libs.androidx.core.ktx)
     implementation(libs.android.material)
     implementation(libs.androidx.lifecycle.livedata.ktx)
@@ -76,7 +87,10 @@ dependencies {
     kapt(libs.dagger.hilt.compiler)
 
     implementation(libs.room)
-    kapt(libs.room.compiler)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
+
+    implementation(libs.timber)
 
     testImplementation(libs.junit)
     testImplementation(libs.androidx.junit)

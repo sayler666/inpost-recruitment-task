@@ -1,11 +1,11 @@
-package pl.inpost.recruitmenttask.network.model
+package pl.inpost.recruitmenttask.shipments.data.remote.model
 
 import java.time.ZonedDateTime
 
 data class ShipmentNetwork(
     val number: String,
-    val shipmentType: String,
-    val status: String,
+    val shipmentType: ShipmentType,
+    val status: ShipmentStatus,
     val eventLog: List<EventLogNetwork>,
     val openCode: String?,
     val expiryDate: ZonedDateTime?,
