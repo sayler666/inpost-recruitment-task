@@ -26,4 +26,5 @@
     <string name="status_not_ready">Nie gotowa</string>
 
     <string name="error">Coś poszło nie tak :(</string>
+    <string name="no_shipments">Brak przesyłek</string>
 </resources>

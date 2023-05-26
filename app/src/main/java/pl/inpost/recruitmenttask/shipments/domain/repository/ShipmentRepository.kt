@@ -6,4 +6,5 @@ import pl.inpost.recruitmenttask.shipments.data.local.model.ShipmentWithEventLog
 interface ShipmentRepository {
     fun getShipments(): Flow<List<ShipmentWithEventLogsCached>>
     suspend fun refreshShipments()
+    suspend fun archiveShipment(shipmentNumber: String)
 }

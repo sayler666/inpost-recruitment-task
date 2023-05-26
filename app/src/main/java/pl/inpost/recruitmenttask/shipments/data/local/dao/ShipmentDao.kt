@@ -5,6 +5,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
+import pl.inpost.recruitmenttask.shipments.data.local.model.Archived
 import pl.inpost.recruitmenttask.shipments.data.local.model.EventLogCached
 import pl.inpost.recruitmenttask.shipments.data.local.model.ShipmentCached
 import pl.inpost.recruitmenttask.shipments.data.local.model.ShipmentWithEventLogsCached
@@ -25,7 +26,13 @@ abstract class ShipmentDao {
     }
 
     @Transaction
-    @Query("SELECT * FROM ShipmentCached")
+    @Query(
+        "SELECT * FROM ShipmentCached LEFT JOIN Archived " +
+                "ON ShipmentCached.number = Archived.shipmentNumber WHERE shipmentNumber is NULL"
+    )
     abstract fun getShipments(): Flow<List<ShipmentWithEventLogsCached>>
+
+    @Upsert
+    abstract suspend fun archiveShipment(archived: Archived)
 
 }

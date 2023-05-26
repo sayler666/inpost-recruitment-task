@@ -34,6 +34,7 @@ fun ShipmentItem(shipment: ShipmentDisplayableItem) {
 
     Box(
         modifier = Modifier
+            .background(MaterialTheme.colorScheme.surface)
             .fillMaxWidth()
     ) {
         Column(
@@ -47,7 +48,7 @@ fun ShipmentItem(shipment: ShipmentDisplayableItem) {
                         .show()
                 }
                 .padding(top = 16.dp)
-                .padding(bottom = 16.dp)
+                .padding(bottom = 28.dp)
                 .padding(horizontal = 20.dp)
 
         ) {
@@ -127,18 +128,20 @@ fun ShipmentItem(shipment: ShipmentDisplayableItem) {
                 }
             }
         }
-    }
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(12.dp)
-            .background(
-                brush = Brush.verticalGradient(
-                    listOf(
-                        MaterialTheme.colorScheme.surfaceTint,
-                        MaterialTheme.colorScheme.background
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(12.dp)
+                .align(Alignment.BottomCenter)
+                .background(
+                    brush = Brush.verticalGradient(
+                        listOf(
+                            MaterialTheme.colorScheme.surfaceTint,
+                            MaterialTheme.colorScheme.background
+                        )
                     )
                 )
-            )
-    )
+        )
+    }
+
 }

@@ -12,7 +12,9 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import pl.inpost.recruitmenttask.R
-import pl.inpost.recruitmenttask.shipments.domain.repository.ShipmentRepository
+import pl.inpost.recruitmenttask.shipments.domain.usecase.ArchiveShipmentUseCase
+import pl.inpost.recruitmenttask.shipments.domain.usecase.GetShipmentsUseCase
+import pl.inpost.recruitmenttask.shipments.domain.usecase.RefreshShipmentsUseCase
 import pl.inpost.recruitmenttask.shipments.presentation.mapper.ShipmentsMapper
 import pl.inpost.recruitmenttask.shipments.presentation.model.ShipmentsUiState
 import timber.log.Timber
@@ -20,7 +22,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ShipmentsViewModel @Inject constructor(
-    private val shipmentRepository: ShipmentRepository,
+    private val getShipmentsUseCase: GetShipmentsUseCase,
+    private val refreshShipmentsUseCase: RefreshShipmentsUseCase,
+    private val archiveShipmentUseCase: ArchiveShipmentUseCase,
     private val mapper: ShipmentsMapper
 ) : ViewModel() {
 
@@ -40,26 +44,39 @@ class ShipmentsViewModel @Inject constructor(
     val state: StateFlow<ShipmentsUiState> = _state.asStateFlow()
 
     init {
+        _error.tryEmit(null)
         observeShipmentData()
         refreshData()
     }
 
     private fun observeShipmentData() {
-        viewModelScope.launch(SupervisorJob() + exceptionHandler) {
-            shipmentRepository.getShipments()
+        viewModelScope.launch {
+            getShipmentsUseCase()
                 .collect {
-                    _state.value = _state.value.copy(
-                        isLoading = false,
-                        shipments = mapper.toDisplayable(it)
-                    )
+                    it.onSuccess {
+                        _state.value = _state.value.copy(
+                            isLoading = false,
+                            shipments = mapper.toDisplayable(it)
+                        )
+                    }.onFailure {
+                        _state.value = _state.value.copy(isLoading = false)
+                        _error.emit(R.string.error)
+                    }
                 }
         }
     }
 
     fun refreshData() {
-        _state.value = _state.value.copy(isLoading = true)
         viewModelScope.launch(SupervisorJob() + exceptionHandler) {
-            shipmentRepository.refreshShipments()
+            _state.value = _state.value.copy(isLoading = true)
+            refreshShipmentsUseCase()
+            _state.value = _state.value.copy(isLoading = false)
+        }
+    }
+
+    fun archiveShipment(shipmentNumber: String) {
+        viewModelScope.launch(SupervisorJob() + exceptionHandler) {
+            archiveShipmentUseCase(shipmentNumber)
         }
     }
 }
