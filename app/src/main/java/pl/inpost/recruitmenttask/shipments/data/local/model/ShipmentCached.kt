@@ -45,11 +45,21 @@ data class EventLogCached(
     val date: ZonedDateTime
 )
 
+@Entity
+data class Archived(
+    @PrimaryKey val shipmentNumber: String,
+)
+
 data class ShipmentWithEventLogsCached(
     @Embedded val shipment: ShipmentCached,
     @Relation(
         parentColumn = "number",
         entityColumn = "shipmentNumber"
     )
-    val eventLogs: List<EventLogCached>
+    val eventLogs: List<EventLogCached>,
+    @Relation(
+        parentColumn = "number",
+        entityColumn = "shipmentNumber"
+    )
+    val archived: Archived? = null
 )

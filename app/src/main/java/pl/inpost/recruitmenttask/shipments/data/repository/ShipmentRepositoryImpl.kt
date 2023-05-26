@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import pl.inpost.recruitmenttask.shipments.data.local.dao.ShipmentDao
+import pl.inpost.recruitmenttask.shipments.data.local.model.Archived
 import pl.inpost.recruitmenttask.shipments.data.local.model.ShipmentWithEventLogsCached
 import pl.inpost.recruitmenttask.shipments.data.mapper.toCachedModel
 import pl.inpost.recruitmenttask.shipments.data.remote.api.ShipmentApi
@@ -27,5 +28,9 @@ class ShipmentRepositoryImpl @Inject constructor(
                 shipmentDao.saveShipmentsWithEventLogs(cachedShipments)
             }
             .onFailure { error -> throw error }
+    }
+
+    override suspend fun archiveShipment(shipmentNumber: String) {
+        shipmentDao.archiveShipment(Archived(shipmentNumber))
     }
 }
