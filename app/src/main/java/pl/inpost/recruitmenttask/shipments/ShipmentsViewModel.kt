@@ -29,10 +29,14 @@ class ShipmentsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, exception ->
+        handleException(exception)
+    }
+
+    private fun handleException(exception: Throwable) {
         Timber.e(exception)
-        _state.value = _state.value.copy(isLoading = false)
         viewModelScope.launch {
-            // TODO more sophisticated error message
+            _state.value = _state.value.copy(isLoading = false)
+            // TODO: better error messages
             _error.emit(R.string.error)
         }
     }
@@ -44,23 +48,23 @@ class ShipmentsViewModel @Inject constructor(
     val state: StateFlow<ShipmentsUiState> = _state.asStateFlow()
 
     init {
-        observeShipmentData()
-        refreshData()
+        observeShipments()
     }
 
-    private fun observeShipmentData() {
+    private fun observeShipments() {
         viewModelScope.launch {
             getShipmentsUseCase()
                 .collect {
-                    it.onSuccess {
-                        _state.value = _state.value.copy(
-                            isLoading = false,
-                            shipments = mapper.toDisplayable(it)
-                        )
-                    }.onFailure {
-                        _state.value = _state.value.copy(isLoading = false)
-                        _error.emit(R.string.error)
-                    }
+                    it.onSuccess { shipments ->
+                        try {
+                            _state.value = _state.value.copy(
+                                isLoading = false,
+                                shipments = mapper.toDisplayable(shipments)
+                            )
+                        } catch (e: Exception) {
+                            handleException(e)
+                        }
+                    }.onFailure { e -> handleException(e) }
                 }
         }
     }
@@ -69,7 +73,6 @@ class ShipmentsViewModel @Inject constructor(
         viewModelScope.launch(SupervisorJob() + exceptionHandler) {
             _state.value = _state.value.copy(isLoading = true)
             refreshShipmentsUseCase()
-            _state.value = _state.value.copy(isLoading = false)
         }
     }
 

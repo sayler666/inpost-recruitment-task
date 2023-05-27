@@ -1,7 +1,6 @@
 package pl.inpost.recruitmenttask.shipments.data.repository
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import pl.inpost.recruitmenttask.shipments.data.local.dao.ShipmentDao
 import pl.inpost.recruitmenttask.shipments.data.local.model.Archived
@@ -16,18 +15,23 @@ class ShipmentRepositoryImpl @Inject constructor(
     private val shipmentDao: ShipmentDao
 ) : ShipmentRepository {
     override fun getShipments(): Flow<List<ShipmentWithEventLogsCached>> = flow {
-        emitAll(shipmentDao.getShipments())
+        shipmentDao.getShipments().collect {
+            if (it.isEmpty()) {
+                // emit empty list only if there are archived shipments
+                if (shipmentDao.hasArchivedShipments()) emit(it)
+                refreshShipments()
+            } else {
+                emit(it)
+            }
+        }
     }
 
     override suspend fun refreshShipments() {
-        shipmentApi.getShipments()
-            .onSuccess { shipmentsNetwork ->
-                val cachedShipments = shipmentsNetwork.map { shipment ->
-                    shipment.toCachedModel()
-                }
-                shipmentDao.saveShipmentsWithEventLogs(cachedShipments)
-            }
-            .onFailure { error -> throw error }
+        shipmentApi.getShipments().map { shipment ->
+            shipment.toCachedModel()
+        }.also { cachedShipments ->
+            shipmentDao.saveShipmentsWithEventLogs(cachedShipments)
+        }
     }
 
     override suspend fun archiveShipment(shipmentNumber: String) {

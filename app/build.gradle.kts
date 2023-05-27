@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.android.hilt)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.android.junit5)
 }
 
 android {
@@ -51,8 +52,12 @@ android {
 
     kotlinOptions {
         freeCompilerArgs = listOf(
-            "-opt-in=androidx.compose.material.ExperimentalMaterialApi"
-        )
+            "-opt-in=androidx.compose.material.ExperimentalMaterialApi",
+            "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
+            "-opt-in=androidx.compose.foundation.ExperimentalFoundationApi",
+            "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+
+            )
     }
 
     composeOptions {
@@ -93,6 +98,10 @@ dependencies {
     implementation(libs.timber)
 
     testImplementation(libs.junit)
-    testImplementation(libs.androidx.junit)
-    testImplementation(libs.androidx.espresso)
+    testImplementation(libs.test.junit.jupiter.api)
+    testRuntimeOnly(libs.test.junit.jupiter.engine)
+    testImplementation(libs.test.kotlin)
+    testImplementation(libs.test.kotlin.coroutines)
+    testImplementation(libs.test.mockk)
+    testImplementation(libs.test.turbine)
 }
