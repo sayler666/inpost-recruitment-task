@@ -10,11 +10,10 @@ fun interface GetShipmentsUseCase : () -> Flow<Result<List<ShipmentWithEventLogs
 
 fun getShipments(
     shipmentRepository: ShipmentRepository,
-): Flow<Result<List<ShipmentWithEventLogsCached>>> {
-    return shipmentRepository.getShipments().map {
+): Flow<Result<List<ShipmentWithEventLogsCached>>> = shipmentRepository.getShipments()
+    .map {
         Result.success(it)
     }.catch { cause ->
         emit(Result.failure(cause))
     }
-}
 

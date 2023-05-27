@@ -29,12 +29,8 @@ class MockShipmentApi(
         jsonAdapter.fromJson(json) as ShipmentsResponse
     }
 
-    override suspend fun getShipments(): Result<List<ShipmentNetwork>> {
+    override suspend fun getShipments(): List<ShipmentNetwork> {
         delay(1000)
-        return try {
-            Result.success(response.shipments)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+        return response.shipments
     }
 }

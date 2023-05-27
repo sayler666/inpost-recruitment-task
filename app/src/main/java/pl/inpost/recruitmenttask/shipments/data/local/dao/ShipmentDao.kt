@@ -32,6 +32,9 @@ abstract class ShipmentDao {
     )
     abstract fun getShipments(): Flow<List<ShipmentWithEventLogsCached>>
 
+    @Query("SELECT EXISTS(SELECT * FROM Archived)")
+    abstract suspend fun hasArchivedShipments(): Boolean
+
     @Upsert
     abstract suspend fun archiveShipment(archived: Archived)
 
