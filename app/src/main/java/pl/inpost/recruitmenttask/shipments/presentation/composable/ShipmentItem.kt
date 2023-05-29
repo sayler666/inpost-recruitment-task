@@ -29,8 +29,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import pl.inpost.recruitmenttask.R
+import pl.inpost.recruitmenttask.core.theme.TextLabel
 import pl.inpost.recruitmenttask.shipments.presentation.model.ShipmentDisplayableItem
-import pl.inpost.recruitmenttask.ui.TextLabel
 
 
 @Composable

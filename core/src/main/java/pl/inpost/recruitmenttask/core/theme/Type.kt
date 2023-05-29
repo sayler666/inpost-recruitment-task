@@ -1,4 +1,4 @@
-package pl.inpost.recruitmenttask.ui
+package pl.inpost.recruitmenttask.core.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
@@ -6,7 +6,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import pl.inpost.recruitmenttask.R
+import pl.inpost.recruitmenttask.core.R
 
 val MontserratMedium = FontFamily(Font(R.font.montserrat_medium))
 val MontserratSemiBold = FontFamily(Font(R.font.montserrat_semibold))
