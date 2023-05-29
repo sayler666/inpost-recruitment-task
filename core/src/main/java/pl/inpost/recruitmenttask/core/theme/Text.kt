@@ -1,4 +1,4 @@
-package pl.inpost.recruitmenttask.ui
+package pl.inpost.recruitmenttask.core.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text

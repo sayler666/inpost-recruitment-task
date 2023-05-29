@@ -1,4 +1,4 @@
-package pl.inpost.recruitmenttask
+package pl.inpost.recruitmenttask.core
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.StandardTestDispatcher

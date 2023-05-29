@@ -11,12 +11,12 @@ import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
-import pl.inpost.recruitmenttask.MainDispatcherExtension
 import pl.inpost.recruitmenttask.shipments.data.local.dao.ShipmentDao
 import pl.inpost.recruitmenttask.shipments.data.remote.api.ShipmentApi
 import pl.inpost.recruitmenttask.shipments.generateShipmentsApiData
 import pl.inpost.recruitmenttask.shipments.generateShipmentsCachedData
 import kotlin.test.assertEquals
+import pl.inpost.recruitmenttask.core.MainDispatcherExtension
 
 /* Sample repository unit tests */
 class ShipmentRepositoryImplTest {
