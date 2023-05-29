@@ -68,6 +68,7 @@ kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 android-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 android-junit5 = { id = "de.mannodermaus.android-junit5", version.ref = "android-junit5" }
+com-android-library = { id = "com.android.library", version.ref = "agp" }
 
 [bundles]
 

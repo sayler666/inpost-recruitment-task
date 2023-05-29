@@ -24,7 +24,6 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
         compose = true
         buildConfig = true
     }
@@ -69,9 +68,15 @@ android {
             File(buildDir, "generated/ksp/$name/kotlin")
         )
     }
+    sourceSets {
+        getByName("test") {
+            java.srcDir(project(":core").file("src/test/java"))
+        }
+    }
 }
 
 dependencies {
+    implementation(project(":core"))
     coreLibraryDesugaring(libs.desugar.jdk.libs)
     implementation(libs.androidx.core.ktx)
     implementation(libs.android.material)
@@ -84,7 +89,6 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.hilt.navigation.compose)
-    implementation(libs.accompanist.systemuicontroller)
     implementation(libs.compose.destinations.core)
     ksp(libs.compose.destinations.ksp)
 
@@ -97,6 +101,7 @@ dependencies {
 
     implementation(libs.timber)
 
+    testImplementation(project(":core"))
     testImplementation(libs.junit)
     testImplementation(libs.test.junit.jupiter.api)
     testRuntimeOnly(libs.test.junit.jupiter.engine)

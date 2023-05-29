@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
-import pl.inpost.recruitmenttask.MainDispatcherExtension
 import pl.inpost.recruitmenttask.R
+import pl.inpost.recruitmenttask.core.MainDispatcherExtension
 import pl.inpost.recruitmenttask.shipments.data.local.model.ShipmentWithEventLogsCached
 import pl.inpost.recruitmenttask.shipments.domain.usecase.ArchiveShipmentUseCase
 import pl.inpost.recruitmenttask.shipments.domain.usecase.GetShipmentsUseCase

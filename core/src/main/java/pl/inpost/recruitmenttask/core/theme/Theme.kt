@@ -1,4 +1,4 @@
-package pl.inpost.recruitmenttask.ui
+package pl.inpost.recruitmenttask.core.theme
 
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
@@ -39,6 +39,7 @@ private val lightColors: ColorScheme = lightColorScheme(
 
 @Composable
 fun InPostTheme(content: @Composable () -> Unit) {
+    // TODO: Add dark theme support (out of scope)
     MaterialTheme(
         colorScheme = lightColors,
         typography = Typography,
